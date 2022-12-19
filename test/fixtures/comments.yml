@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commenter: MyString
+  commenterId: 1
+  bloId: 1
+  body: MyText
+  likes: 1
+  dislikes: 1
+  blog: one
+
+two:
+  commenter: MyString
+  commenterId: 1
+  bloId: 1
+  body: MyText
+  likes: 1
+  dislikes: 1
+  blog: two
