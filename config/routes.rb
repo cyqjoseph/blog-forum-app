@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/all_blogs', to: 'blogs#all_blogs'
   get '/all_blogs/:tag', to: 'blogs#filter'
   # resources :blogs, only: [:show, :index]
-  resources :users, only: [:create, :show, :index] do 
+  resources :users do 
       resources :blogs do
         resources :comments
    end

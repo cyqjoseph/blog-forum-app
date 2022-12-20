@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       end
       
       def create
-         @user = User.new(user_params)
+         @user = User.new(new_user_params)
              if @user.save
                  login!  
                  render json: {
@@ -42,9 +42,31 @@ class UsersController < ApplicationController
             }
             end
       end
-private
+
+      def update
+        @user = User.find(params[:id])
+        if @user
+            if @user.update(user_params)
+                @blogs = Blog.where(creatorId: params[:id])
+                @blogs.update(creator: @user.username)
+
+                @comments = Comment.where(commenterId: params[:id])
+                @comments.update(commenter: @user.username)
+                
+                render json: @blogs
+            else
+                render :edit, status: :unprocessable_entity
+            end
+
+        end
+      end
       
-     def user_params
+private
+    def user_params
+        params.require(:user).permit(:username, :password)
+    end
+      
+    def new_user_params
          params.require(:user).permit(:username, :password, :password_confirmation)
      end
 end

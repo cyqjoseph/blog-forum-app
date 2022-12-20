@@ -50,6 +50,8 @@ class BlogsController < ApplicationController
         end
     end
 
+
+
     def destroy
         @user = User.find(params[:user_id])
         @blog = Blog.find(params[:id])

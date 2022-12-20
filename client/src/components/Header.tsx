@@ -20,6 +20,7 @@ function Header() {
   };
 
   useEffect(() => setLoggedIn(user.isLoggedIn), [user]);
+
   // useEffect(() => console.log(user), [user]);
   return (
     <nav className="navbar bg-dark d-flex navbar-dark text-white">
@@ -39,7 +40,12 @@ function Header() {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item">Profile</button>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => navigate(`/profile/${user.id}`)}
+                  >
+                    Profile
+                  </button>
                 </li>
                 <li>
                   <button

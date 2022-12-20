@@ -14,6 +14,7 @@ export interface UserData {
   id: number;
   email?: string;
   password?: string;
+  created_at?: string;
 }
 
 export interface AuthFormProps {

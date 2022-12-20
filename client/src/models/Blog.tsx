@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BlogData } from "../interfaces";
 import { calculateElapsed } from "../utils/Helper";
+import { Link } from "react-router-dom";
 class Blog {
   private creator: string;
   private creatorId: number;
@@ -62,7 +63,12 @@ class Blog {
           <h4 className="card-header display-8 text-center py-4 d-flex justify-content-around">
             <div>
               {this.title} -{" "}
-              <span className="text-primary">@{this.creator}</span>
+              <Link
+                className="text-primary text-decoration-none"
+                to={`/profile/${this.creatorId}`}
+              >
+                @{this.creator}
+              </Link>
             </div>
             <div className="">
               <button className="btn btn-sm btn-success mx-1">
@@ -84,16 +90,14 @@ class Blog {
             {this.body} - ({calculateElapsed(this.created)})
           </h4>
           <div className="lead d-flex justify-content-around pb-2">
-            <div className="">
-              <div className="d-flex">
-                {this.tag_list.map((ele) => (
-                  <div className="mx-1">
-                    <button className="btn btn-sm btn-light border border-dark">
-                      #{ele}
-                    </button>
-                  </div>
-                ))}
-              </div>
+            <div className="d-flex">
+              {this.tag_list.map((ele) => (
+                <div className="mx-1">
+                  <button className="btn btn-sm btn-light border border-dark">
+                    #{ele.toLowerCase()}
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>

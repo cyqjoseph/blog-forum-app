@@ -35,6 +35,16 @@ const getMinutes = function (data: string) {
   }
 };
 
+const getDays = function (data: string) {
+  const days = Math.floor(moment.duration(moment().diff(data)).asDays() % 30);
+  if (days > 1) {
+    return days + " days ";
+  } else if (days === 1) {
+    return "1 day ";
+  } else {
+    return "";
+  }
+};
 const getYears = function (data: string) {
   const years = Math.floor(moment.duration(moment().diff(data)).asYears());
   if (years > 1) {
@@ -53,11 +63,18 @@ export const calculateElapsed = function (data: string): string {
   if (getMonths(data) !== "") {
     return getMonths(data) + "ago";
   }
+  if (getDays(data) !== "") {
+    return getDays(data) + "ago";
+  }
   if (getHours(data) !== "") {
     return getHours(data) + "ago";
   }
   if (getMinutes(data) !== "") {
     return getMinutes(data) + "ago";
   }
-  return "Just";
+  return "Just Posted";
+};
+
+export const getFormattedDate = function (data: string): string {
+  return moment(data).format("MMMM D, YYYY");
 };

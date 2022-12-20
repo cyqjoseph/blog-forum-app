@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { useActions } from "../hooks/use-actions";
-// import { useTypedSelector } from "../hooks/use-typed-selector";
-// import { RootState } from "../state";
+import Header from "../components/Header";
 import { useNavigate } from "react-router";
 
 function Signup(): JSX.Element {
@@ -41,7 +40,8 @@ function Signup(): JSX.Element {
           setError(response.data.errors[0]);
           // addError(response.data.errors);
         }
-      });
+      })
+      .catch((e) => {});
   };
   // useEffect(() => {
   //   if (errors.length > 0) {
@@ -51,80 +51,83 @@ function Signup(): JSX.Element {
   //   }
   // }, [errors]);
   return (
-    <div className="container h-100 w-50">
-      <div className="d-flex flex-column justify-content-center  pt-5">
-        {error === "" ? (
-          <div />
-        ) : (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
-        <div className="fs-1 fw-bold d-block text-center ">Sign up</div>
-        <hr className="border border-dark opacity-50" />
-        <form className="text-center" onSubmit={submitHandler}>
-          <div className="form-group py-3 ">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              required
-              ref={usernameInputRef}
-            />
-          </div>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              required
-              ref={emailInputRef}
-            />
-            {/* <div id="emailHelp" className="form-text">
+    <Fragment>
+      <Header />
+      <div className="container h-100 w-50">
+        <div className="d-flex flex-column justify-content-center  pt-5">
+          {error === "" ? (
+            <div />
+          ) : (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
+          <div className="fs-1 fw-bold d-block text-center ">Sign up</div>
+          <hr className="border border-dark opacity-50" />
+          <form className="text-center" onSubmit={submitHandler}>
+            <div className="form-group py-3 ">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                required
+                ref={usernameInputRef}
+              />
+            </div>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Email address
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                required
+                ref={emailInputRef}
+              />
+              {/* <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div> */}
-          </div>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Create Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              required
-              ref={passwordInputRef}
-            />
-          </div>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              required
-              ref={confirmInputRef}
-            />
-          </div>
-          <div className="py-5 d-flex justify-content-between d-flex flex-column justify-content-center align-items-center">
-            <button type="submit" className="btn btn-primary px-5">
-              Submit
-            </button>
-          </div>
-        </form>
-        <button
-          type="button"
-          className="btn btn-secondary py-2 mx-auto"
-          onClick={() => navigate("/login")}
-        >
-          Login with an existing account
-        </button>
+            </div>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Create Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                ref={passwordInputRef}
+              />
+            </div>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                ref={confirmInputRef}
+              />
+            </div>
+            <div className="py-5 d-flex justify-content-between d-flex flex-column justify-content-center align-items-center">
+              <button type="submit" className="btn btn-primary px-5">
+                Submit
+              </button>
+            </div>
+          </form>
+          <button
+            type="button"
+            className="btn btn-secondary py-2 mx-auto"
+            onClick={() => navigate("/login")}
+          >
+            Login with an existing account
+          </button>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 export default Signup;

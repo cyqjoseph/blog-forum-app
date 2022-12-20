@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import Header from "../components/Header";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useActions } from "../hooks/use-actions";
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
@@ -41,66 +42,69 @@ function Login(): JSX.Element {
 
   useEffect(() => {}, [isLoggedIn]);
   return (
-    <div className="container h-100 w-50">
-      <div className="d-flex flex-column justify-content-center pt-5 ">
-        {error === "" ? (
-          <div />
-        ) : (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
-        <div className="fs-1 fw-bold d-block text-center ">Login</div>
-        <hr className="border border-dark opacity-50" />
-        <form className="text-center" onSubmit={submitHandler}>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Username
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              required
-              ref={usernameInputRef}
-            />
-          </div>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              required
-              ref={emailInputRef}
-            />
-          </div>
-          <div className="form-group py-3">
-            <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-              Enter Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              required
-              ref={passwordInputRef}
-            />
-          </div>
-          <div className="py-5 d-flex flex-column justify-content-center align-items-center">
-            <button type="submit" className="btn btn-primary px-5">
-              Submit
-            </button>
-          </div>
-        </form>
-        <button
-          type="button"
-          className="btn btn-secondary py-2 mx-auto"
-          onClick={() => navigate("/signup")}
-        >
-          Create an account
-        </button>
+    <Fragment>
+      <Header />
+      <div className="container h-100 w-50">
+        <div className="d-flex flex-column justify-content-center pt-5 ">
+          {error === "" ? (
+            <div />
+          ) : (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
+          <div className="fs-1 fw-bold d-block text-center ">Login</div>
+          <hr className="border border-dark opacity-50" />
+          <form className="text-center" onSubmit={submitHandler}>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Username
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                required
+                ref={usernameInputRef}
+              />
+            </div>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Email address
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                required
+                ref={emailInputRef}
+              />
+            </div>
+            <div className="form-group py-3">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+                Enter Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                ref={passwordInputRef}
+              />
+            </div>
+            <div className="py-5 d-flex flex-column justify-content-center align-items-center">
+              <button type="submit" className="btn btn-primary px-5">
+                Submit
+              </button>
+            </div>
+          </form>
+          <button
+            type="button"
+            className="btn btn-secondary py-2 mx-auto"
+            onClick={() => navigate("/signup")}
+          >
+            Create an account
+          </button>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 export default Login;

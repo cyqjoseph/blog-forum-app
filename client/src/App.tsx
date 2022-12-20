@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { LoginData, AuthResponse } from "./interfaces";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/DashboardPage";
 import Login from "./pages/LoginPage";
 import { useActions } from "./hooks/use-actions";
 import { useTypedSelector } from "./hooks/use-typed-selector";
@@ -15,6 +15,8 @@ import { logoutUser } from "./state/action-creators";
 import CreateBlog from "./components/CreateBlog";
 import BlogPage from "./pages/BlogPage";
 import EditBlog from "./components/EditBlog";
+import ProfilePage from "./pages/ProfilePage";
+import EditUserPage from "./components/EditUserPage";
 function App() {
   const data = useTypedSelector((state: RootState) => state);
   const { loginUser } = useActions();
@@ -57,13 +59,14 @@ function App() {
   useEffect(() => loginStatus(), [loginStatus]);
   return (
     <div>
-      <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
         <Route path="dashboard/*" element={<Dashboard />}></Route>
+        <Route path="profile/:id" element={<ProfilePage />} />
         <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/edit-profile/:id" element={<EditUserPage />} />
         <Route path="/blog/:id" element={<BlogPage />} />
         <Route path="/blog/:id/edit-blog" element={<EditBlog />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
