@@ -4,7 +4,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./state";
 import { BrowserRouter } from "react-router-dom";
-require("dotenv").config();
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

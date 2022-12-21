@@ -11,7 +11,7 @@ function DashboardPage() {
   const tagRef = useRef<HTMLInputElement>(null);
   const getBlogs = function () {
     axios
-      .get(`${process.env.API_URL}/all_blogs`, {
+      .get(`${process.env.REACT_APP_API_URL}/all_blogs`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -27,7 +27,7 @@ function DashboardPage() {
     }
     const tag = tagRef.current.value;
     axios
-      .get(`${process.env.API_URL}/all_blogs/${tag}`, {
+      .get(`${process.env.REACT_APP_API_URL}/all_blogs/${tag}`, {
         withCredentials: true,
       })
       .then((response) => setBlogs(Blog.parseBlogs(response.data)))

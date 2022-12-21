@@ -27,7 +27,11 @@ function Login(): JSX.Element {
     const user = { username, email, password };
 
     axios
-      .post(`${process.env.API_URL}/login`, { user }, { withCredentials: true })
+      .post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        { user },
+        { withCredentials: true }
+      )
       .then((response) => {
         if (response.status === 200 && response.data.logged_in) {
           loginUser({ username, id: response.data.user!.id });

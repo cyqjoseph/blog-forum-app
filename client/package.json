@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-tag-input": "^6.6.1"
+    "@types/react-tag-input": "^6.6.1",
+    "dotenv-webpack": "^8.0.1"
   }
 }

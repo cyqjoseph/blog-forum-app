@@ -22,7 +22,7 @@ function BlogPage() {
 
   const getBlogData = useCallback(() => {
     axios
-      .get(`${process.env.API_URL}/users/${user.id}/blogs/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}`)
       .then((response) => {
         setBlogData(response.data[0]);
         setBlogLoading(false);
@@ -34,7 +34,9 @@ function BlogPage() {
 
   const getCommentData = useCallback(() => {
     axios
-      .get(`${process.env.API_URL}/users/${user.id}/blogs/${id}/comments`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}/comments`
+      )
       .then((response) => {
         if (response.data.length === 0) {
           setNoCommentData(true);
@@ -49,7 +51,7 @@ function BlogPage() {
 
   const deleteBlogHandler = function () {
     axios
-      .delete(`${process.env.API_URL}/users/${user.id}/blogs/${id}`, {
+      .delete(`${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}`, {
         withCredentials: true,
       })
       .then((response) => {

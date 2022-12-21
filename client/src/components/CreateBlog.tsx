@@ -29,7 +29,7 @@ function CreateBlog() {
     };
     axios
       .post(
-        `${process.env.API_URL}/users/${user.id}/blogs`,
+        `${process.env.REACT_APP_API_URL}/users/${user.id}/blogs`,
         { blog },
         {
           withCredentials: true,
