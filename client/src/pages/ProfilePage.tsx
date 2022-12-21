@@ -14,7 +14,7 @@ function ProfilePage() {
   const navigate = useNavigate();
   const [userResponse, setUserRepsonse] = useState<UserData>();
   const [blogsResponse, setBlogsResponse] = useState<Blog[]>();
-  const [noBlogs, setNoBlogs] = useState<boolean>(false);
+  const [noBlogsData, setNoBlogsData] = useState<boolean>(false);
   const getUser = function () {
     axios
       .get(`http://localhost:3001/users/${id}`)
@@ -32,10 +32,11 @@ function ProfilePage() {
       .then((response) => {
         const blogs = Blog.parseBlogs(response.data);
         if (blogs.length === 0) {
-          setNoBlogs(true);
+          setNoBlogsData(true);
+        } else {
+          setNoBlogsData(false);
+          setBlogsResponse(blogs);
         }
-        console.log(blogs);
-        setBlogsResponse(blogs);
       })
       .catch((e) => {});
   };
@@ -83,6 +84,29 @@ function ProfilePage() {
               </div>
             </div>
             <hr className="border border-dark opacity-50" />
+            <div className="fs-1 fw-bold text-center py-2">Blogs</div>
+            <hr className="border border-dark opacity-50 " />
+            {noBlogsData && (
+              <div className="alert alert-danger mt-5" role="alert">
+                <h4 className="alert-heading text-center py-2">
+                  Nothing to see here...
+                </h4>
+                <hr />
+
+                <p className="text-center fs-5">Create your first post!</p>
+                <hr />
+                <div className="text-center">
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      navigate("/create-blog");
+                    }}
+                  >
+                    + Create blog
+                  </button>
+                </div>
+              </div>
+            )}
             {blogsResponse && Blog.renderAll(blogsResponse)}
           </div>
         )}

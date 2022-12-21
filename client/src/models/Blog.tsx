@@ -62,13 +62,13 @@ class Blog {
         <div className="card border border-dark ">
           <h4 className="card-header display-8 text-center py-4 d-flex justify-content-around">
             <div>
-              {this.title} -{" "}
               <Link
                 className="text-primary text-decoration-none"
                 to={`/profile/${this.creatorId}`}
               >
                 @{this.creator}
               </Link>
+              &nbsp; - {this.title}
             </div>
             <div className="">
               <button className="btn btn-sm btn-success mx-1">

@@ -16,18 +16,20 @@ function Header() {
       .then((response) => {
         logoutUser();
         navigate("/login");
-      });
+      })
+      .catch((e) => {});
   };
 
   useEffect(() => setLoggedIn(user.isLoggedIn), [user]);
 
   // useEffect(() => console.log(user), [user]);
   return (
-    <nav className="navbar bg-dark d-flex navbar-dark text-white">
+    <nav className="navbar bg-dark d-flex navbar-dark text-white sticky-top">
       <div className="container-fluid d-flex justify-content-around">
-        <div className="navbar-brand">ForumNUS</div>
+        {!loggedIn && <div className="navbar-brand mx-auto">ForumNUS</div>}
         {loggedIn && (
           <Fragment>
+            <div className="navbar-brand ">ForumNUS</div>
             <div>Welcome {user.username}</div>
             <div className="dropdown">
               <button

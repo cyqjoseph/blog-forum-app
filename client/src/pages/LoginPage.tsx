@@ -9,9 +9,8 @@ function Login(): JSX.Element {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser } = useActions();
-  const isLoggedIn = useTypedSelector(
-    (state: RootState) => state.user.isLoggedIn
-  );
+  const userStatus = useTypedSelector((state: RootState) => state.user);
+  const isLoggedIn = userStatus.isLoggedIn;
   //const errors = useTypedSelector((state: RootState) => state.errors);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -40,19 +39,16 @@ function Login(): JSX.Element {
       });
   };
 
-  useEffect(() => {}, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn]);
   return (
     <Fragment>
       <Header />
       <div className="container h-100 w-50">
         <div className="d-flex flex-column justify-content-center pt-5 ">
-          {error === "" ? (
-            <div />
-          ) : (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
           <div className="fs-1 fw-bold d-block text-center ">Login</div>
           <hr className="border border-dark opacity-50" />
           <form className="text-center" onSubmit={submitHandler}>
@@ -102,6 +98,13 @@ function Login(): JSX.Element {
           >
             Create an account
           </button>
+          {error && (
+            <div className="pt-5">
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>

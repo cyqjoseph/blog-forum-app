@@ -17,6 +17,7 @@ function BlogPage() {
   const [commentData, setCommentData] = useState<CommentData[]>([]);
   const [blogLoading, setBlogLoading] = useState<boolean>(true);
   const [commentLoading, setCommentLoading] = useState<boolean>(true);
+  const [noCommentData, setNoCommentData] = useState<boolean>(false);
   const user = useTypedSelector((state: RootState) => state.user);
 
   const getBlogData = useCallback(() => {
@@ -27,16 +28,21 @@ function BlogPage() {
         setBlogLoading(false);
       })
       .catch((e) => {
-        // user not authroized to edit form
+        navigate("/dashboard");
       });
-  }, [id, user.id]);
+  }, [id, user.id, navigate]);
 
   const getCommentData = useCallback(() => {
     axios
       .get(`http://localhost:3001/users/${user.id}/blogs/${id}/comments`)
       .then((response) => {
-        setCommentData(response.data);
-        setCommentLoading(false);
+        if (response.data.length === 0) {
+          setNoCommentData(true);
+        } else {
+          setCommentData(response.data);
+          setCommentLoading(false);
+          setNoCommentData(false);
+        }
       })
       .catch((e) => {});
   }, [id, user.id]);
@@ -181,6 +187,16 @@ function BlogPage() {
             </div>
             <CreateComment blogData={blogData} />
             <div>
+              {noCommentData && (
+                <div className="alert alert-danger mt-5" role="alert">
+                  <h4 className="alert-heading text-center py-2">
+                    Nothing to see here...
+                  </h4>
+                  <hr />
+
+                  <p className="text-center fs-5">Be the first to comment!</p>
+                </div>
+              )}
               {!commentLoading &&
                 Comment.parseData(commentData)
                   .reverse()

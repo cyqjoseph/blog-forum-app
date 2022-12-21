@@ -1,14 +1,17 @@
 import axios from "axios";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { useActions } from "../hooks/use-actions";
 import Header from "../components/Header";
 import { useNavigate } from "react-router";
+import { useTypedSelector } from "../hooks/use-typed-selector";
+import { RootState } from "../state";
 
 function Signup(): JSX.Element {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser, addError } = useActions();
   // const errors = useTypedSelector((state: RootState) => state.errors);
+  const user = useTypedSelector((state: RootState) => state.user);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const confirmInputRef = useRef<HTMLInputElement>(null);
@@ -43,25 +46,16 @@ function Signup(): JSX.Element {
       })
       .catch((e) => {});
   };
-  // useEffect(() => {
-  //   if (errors.length > 0) {
-  //     setError(errors[0]);
-  //   } else {
-  //     setError("");
-  //   }
-  // }, [errors]);
+  useEffect(() => {
+    if (user.isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [user.isLoggedIn, navigate]);
   return (
     <Fragment>
       <Header />
       <div className="container h-100 w-50">
         <div className="d-flex flex-column justify-content-center  pt-5">
-          {error === "" ? (
-            <div />
-          ) : (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
           <div className="fs-1 fw-bold d-block text-center ">Sign up</div>
           <hr className="border border-dark opacity-50" />
           <form className="text-center" onSubmit={submitHandler}>
@@ -126,6 +120,13 @@ function Signup(): JSX.Element {
             Login with an existing account
           </button>
         </div>
+        {error && (
+          <div className="pt-5">
+            <div className="alert alert-danger text-center" role="alert">
+              {error}
+            </div>
+          </div>
+        )}
       </div>
     </Fragment>
   );

@@ -51,13 +51,13 @@ class Comment {
       <div className="pb-2" key={this.id}>
         <div className="card p-3">
           <div className="d-flex justify-content-between align-items-center">
-            <div className="user d-flex flex-row align-items-center">
+            <div className="user d-flex flex-row align-items-center w-75">
               <span>
-                <small className="font-weight-bold text-primary mr-2">
+                <small className="font-weight-bold text-primary mr-2 fs-4">
                   @{this.commenter}
                 </small>
-                &nbsp;
-                <small className="font-weight-bold">{this.body}</small>
+
+                <small className="d-flex">{this.body}</small>
               </span>
             </div>
             <small>{calculateElapsed(this.created)}</small>

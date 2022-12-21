@@ -17,14 +17,13 @@ function EditBlog() {
   const titleRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
   const getBlogData = useCallback(() => {
-    console.log(id, user.id);
-
     axios
       .get(`http://localhost:3001/users/${user.id}/blogs/${id}`)
       .then((response) => {
         console.log(response);
+        const data: BlogData = response.data[0];
         setBlogData(response.data[0]);
-        if (blogData?.user_id !== user.id?.toString()) {
+        if (!data || data.creatorId !== user.id) {
           navigate("/dashboard");
           return;
         }

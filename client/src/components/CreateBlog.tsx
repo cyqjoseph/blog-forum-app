@@ -39,7 +39,8 @@ function CreateBlog() {
         console.log(response);
         console.log("Post created successfully");
         navigate("/dashboard");
-      });
+      })
+      .catch((e) => console.log(e));
   };
   return (
     <Fragment>
@@ -47,7 +48,7 @@ function CreateBlog() {
       <div className="container h-100 w-50">
         <div className="d-flex flex-column justify-content-center pt-5 ">
           <div className="fs-1 fw-bold d-block text-center ">
-            Create a new blog
+            Create a new blog!
           </div>
           <hr className="border border-dark opacity-50" />
           <form onSubmit={createBlogHandler} className="text-center">
@@ -82,7 +83,7 @@ function CreateBlog() {
               </em>
             </div>
             <div className="py-5 d-flex flex-column align-items-center">
-              <button type="submit" className="btn btn-primary btn-lg">
+              <button type="submit" className="btn btn-success btn-lg">
                 Submit
               </button>
             </div>
