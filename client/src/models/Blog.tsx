@@ -1,4 +1,3 @@
-import axios from "axios";
 import { BlogData } from "../interfaces";
 import { calculateElapsed } from "../utils/Helper";
 import { Link } from "react-router-dom";
@@ -104,23 +103,6 @@ class Blog {
         </div>
       </div>
     );
-  }
-  private getBlogPageHandler() {
-    //can just route directly??
-    // window.location.assign(`/blog/${this.id}`);
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/users/${this.creatorId}/blogs/${this.id}`
-      )
-      .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          window.location.assign(
-            `https://chimerical-pudding-4ffa6b.netlify.app/blog/${this.id}`
-          );
-        }
-      })
-      .catch((e) => {});
   }
 
   public getReputation(): number {
