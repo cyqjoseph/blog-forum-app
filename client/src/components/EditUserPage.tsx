@@ -4,12 +4,10 @@ import axios from "axios";
 import { useRef, useCallback, useState, useEffect, Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserData } from "../interfaces";
-
-import { useActions } from "../hooks/use-actions";
 import Header from "./Header";
 function EditUserPage() {
-  const [error, setError] = useState("");
-  const { addError } = useActions();
+  // const [error, setError] = useState("");
+  // const { addError } = useActions();
   const navigate = useNavigate();
   const { id } = useParams();
   const [userResponse, setUserRepsonse] = useState<UserData>();
@@ -54,7 +52,6 @@ function EditUserPage() {
       .then((response) => {
         console.log(response);
         navigate("/dashboard");
-        setError("");
       })
       .catch((e) => {});
   };

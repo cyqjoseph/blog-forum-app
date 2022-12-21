@@ -114,7 +114,9 @@ class Blog {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          window.location.assign(`/blog/${this.id}`);
+          window.location.assign(
+            `${process.env.REACT_APP_API_URL}/blog/${this.id}`
+          );
         }
       })
       .catch((e) => {});

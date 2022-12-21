@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
 import axios from "axios";
-import { BlogData, UserData } from "../interfaces";
+import { UserData } from "../interfaces";
 import { getFormattedDate } from "../utils/Helper";
 import Blog from "../models/Blog";
 import Header from "../components/Header";
@@ -44,6 +43,7 @@ function ProfilePage() {
   useEffect(() => {
     getUser();
     getUserBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

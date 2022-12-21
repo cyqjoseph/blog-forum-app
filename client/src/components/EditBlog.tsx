@@ -30,7 +30,7 @@ function EditBlog() {
         setBlogLoading(false);
       })
       .catch((e) => {});
-  }, [id, user.id]);
+  }, [id, user.id, navigate]);
 
   const editBlogHandler = function (
     event: React.SyntheticEvent<HTMLFormElement>

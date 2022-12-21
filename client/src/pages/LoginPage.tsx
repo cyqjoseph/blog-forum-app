@@ -47,7 +47,7 @@ function Login(): JSX.Element {
     if (isLoggedIn) {
       navigate("/dashboard");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
   return (
     <Fragment>
       <Header />

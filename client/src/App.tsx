@@ -1,5 +1,4 @@
 import "./app.css";
-import Header from "./components/Header";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
@@ -65,10 +64,10 @@ function App() {
 
         <Route path="dashboard/*" element={<Dashboard />}></Route>
         <Route path="profile/:id" element={<ProfilePage />} />
-        <Route path="/create-blog" element={<CreateBlog />} />
-        <Route path="/edit-profile/:id" element={<EditUserPage />} />
-        <Route path="/blog/:id" element={<BlogPage />} />
-        <Route path="/blog/:id/edit-blog" element={<EditBlog />} />
+        <Route path="create-blog" element={<CreateBlog />} />
+        <Route path="edit-profile/:id" element={<EditUserPage />} />
+        <Route path="blog/:id" element={<BlogPage />} />
+        <Route path="blog/:id/edit-blog" element={<EditBlog />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>
     </div>
