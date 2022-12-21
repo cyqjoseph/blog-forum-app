@@ -31,7 +31,7 @@ function Signup(): JSX.Element {
     }
     const user = { username, email, password };
     axios
-      .post("http://localhost:3001/users", { user }, { withCredentials: true })
+      .post(`${process.env.API_URL}/users`, { user }, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
           const id = response.data.user.id;

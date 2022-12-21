@@ -17,7 +17,7 @@ function ProfilePage() {
   const [noBlogsData, setNoBlogsData] = useState<boolean>(false);
   const getUser = function () {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`${process.env.API_URL}/users/${id}`)
       .then((response) => {
         setUserRepsonse(response.data.user);
       })
@@ -28,7 +28,7 @@ function ProfilePage() {
 
   const getUserBlogs = function () {
     axios
-      .get(`http://localhost:3001/users/${id}/blogs`)
+      .get(`${process.env.API_URL}/users/${id}/blogs`)
       .then((response) => {
         const blogs = Blog.parseBlogs(response.data);
         if (blogs.length === 0) {

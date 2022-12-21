@@ -19,7 +19,7 @@ function EditUserPage() {
   const confirmInputRef = useRef<HTMLInputElement>(null);
   const getUser = useCallback(() => {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`${process.env.API_URL}/users/${id}`)
       .then((response) => {
         console.log(response);
         if (id !== userState.id?.toString()) {
@@ -45,7 +45,7 @@ function EditUserPage() {
     const user = { username, password };
     axios
       .patch(
-        `http://localhost:3001/users/${userState.id}`,
+        `${process.env.API_URL}/users/${userState.id}`,
         { user },
         {
           withCredentials: true,

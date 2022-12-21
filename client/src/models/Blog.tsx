@@ -108,7 +108,7 @@ class Blog {
     //can just route directly??
     // window.location.assign(`/blog/${this.id}`);
     axios
-      .get(`http://localhost:3001/users/${this.creatorId}/blogs/${this.id}`)
+      .get(`${process.env.API_URL}/users/${this.creatorId}/blogs/${this.id}`)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

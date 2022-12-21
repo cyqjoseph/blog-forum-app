@@ -29,7 +29,9 @@ function CreateComment(props: CreateCommentProps) {
     };
     axios
       .post(
-        `http://localhost:3001/users/${user.id}/blogs/${blogData!.id}/comments`,
+        `${process.env.API_URL}/users/${user.id}/blogs/${
+          blogData!.id
+        }/comments`,
         { comment },
         {
           withCredentials: true,

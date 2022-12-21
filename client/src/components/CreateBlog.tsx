@@ -29,7 +29,7 @@ function CreateBlog() {
     };
     axios
       .post(
-        `http://localhost:3001/users/${user.id}/blogs`,
+        `${process.env.API_URL}/users/${user.id}/blogs`,
         { blog },
         {
           withCredentials: true,

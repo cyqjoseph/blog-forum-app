@@ -12,7 +12,7 @@ function Header() {
   const { logoutUser } = useActions();
   const logoutHandler = function () {
     axios
-      .post("http://localhost:3001/logout", user, { withCredentials: true })
+      .post(`${process.env.API_URL}/logout`, user, { withCredentials: true })
       .then((response) => {
         logoutUser();
         navigate("/login");

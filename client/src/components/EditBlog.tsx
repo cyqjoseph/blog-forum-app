@@ -18,7 +18,7 @@ function EditBlog() {
   const bodyRef = useRef<HTMLTextAreaElement>(null);
   const getBlogData = useCallback(() => {
     axios
-      .get(`http://localhost:3001/users/${user.id}/blogs/${id}`)
+      .get(`${process.env.API_URL}/users/${user.id}/blogs/${id}`)
       .then((response) => {
         console.log(response);
         const data: BlogData = response.data[0];
@@ -50,7 +50,7 @@ function EditBlog() {
     };
     axios
       .patch(
-        `http://localhost:3001/users/${user.id}/blogs/${id}`,
+        `${process.env.API_URL}/users/${user.id}/blogs/${id}`,
         { blog },
         {
           withCredentials: true,
