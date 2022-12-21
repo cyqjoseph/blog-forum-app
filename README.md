@@ -28,7 +28,18 @@
 
 ---
 
-[Deployed application] (https://blog-forum-app-cyqjoseph.netlify.app)
+[Deployed application](https://blog-forum-app-cyqjoseph.netlify.app)
+
+---
+
+Things to do
+
+- Loading spinner
+- Error Handling
+- Make likes/dislikes non-static (or remove completely)
+- More advanced filter
+- UI/UX touchup
+- Delete user/comment functionality
 
 <!--
 Things you may want to cover:

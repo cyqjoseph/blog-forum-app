@@ -15,8 +15,6 @@ function DashboardPage() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
-
         setBlogs(Blog.parseBlogs(response.data));
       })
       .catch((e) => {});
