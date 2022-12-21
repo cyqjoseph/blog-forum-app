@@ -77,12 +77,13 @@ class Blog {
               <button className="btn btn-sm btn-danger ">
                 Disikes: {this.dislikes}
               </button>
-              <button
+              <Link
                 className="btn btn-primary btn-sm border-dark mx-1"
-                onClick={this.getBlogPageHandler.bind(this)}
+                // onClick={this.getBlogPageHandler.bind(this)}
+                to={`/blog/${this.id}`}
               >
                 Read more &#x2192;
-              </button>
+              </Link>
             </div>
           </h4>
 
