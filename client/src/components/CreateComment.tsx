@@ -4,12 +4,13 @@ import axios from "axios";
 import { useRef } from "react";
 import { BlogData } from "../interfaces";
 import { CommentFormData } from "../interfaces";
-
+import { useNavigate } from "react-router";
 type CreateCommentProps = {
   blogData: BlogData | undefined;
 };
 
 function CreateComment(props: CreateCommentProps) {
+  const navigate = useNavigate();
   const { blogData } = props;
   const user = useTypedSelector((state: RootState) => state.user);
   const commentRef = useRef<HTMLTextAreaElement>(null);
@@ -38,7 +39,7 @@ function CreateComment(props: CreateCommentProps) {
         }
       )
       .then((response) => {
-        window.location.reload();
+        navigate("/dashboard");
         console.log(response);
         console.log("Comment created successfully");
       });
