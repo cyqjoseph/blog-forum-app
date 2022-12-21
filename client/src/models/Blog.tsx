@@ -115,7 +115,7 @@ class Blog {
         console.log(response);
         if (response.status === 200) {
           window.location.assign(
-            `${process.env.REACT_APP_API_URL}/blog/${this.id}`
+            `https://chimerical-pudding-4ffa6b.netlify.app/blog/${this.id}`
           );
         }
       })
