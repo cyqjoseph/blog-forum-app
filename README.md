@@ -26,6 +26,10 @@
 3. Install all dependencies: `npm i`
 4. Start the server on port `3000`: `npm start`
 
+---
+
+[Deployed application] (https://blog-forum-app-cyqjoseph.netlify.app)
+
 <!--
 Things you may want to cover:
 * Ruby version
