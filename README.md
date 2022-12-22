@@ -30,6 +30,8 @@
 
 [Deployed application](https://blog-forum-app-cyqjoseph.netlify.app)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/10a84f4f-c57b-46ff-85f0-9c20f9420032/deploy-status)](https://app.netlify.com/sites/blog-forum-app-cyqjoseph/deploys)
+
 ---
 
 Things to do

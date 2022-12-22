@@ -3,11 +3,13 @@ import { RootState } from "../state";
 import axios from "axios";
 import { useState, useEffect, useRef, Fragment } from "react";
 import Blog from "../models/Blog";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 function DashboardPage() {
+  const navigate = useNavigate();
   const user = useTypedSelector((state: RootState) => state.user);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [noBlogsData, setNoBlogsData] = useState(false);
   const tagRef = useRef<HTMLInputElement>(null);
   const getBlogs = function () {
     axios
@@ -34,8 +36,15 @@ function DashboardPage() {
   useEffect(() => {
     if (user.isLoggedIn) {
       getBlogs();
+      if (blogs.length === 0) {
+        setNoBlogsData(true);
+      } else {
+        setNoBlogsData(false);
+      }
+    } else {
+      navigate("/login");
     }
-  }, [user.isLoggedIn]);
+  }, [user.isLoggedIn, navigate, blogs.length]);
   return (
     <Fragment>
       <Header />
@@ -73,6 +82,16 @@ function DashboardPage() {
             &#128269;
           </button>
         </div>
+        {noBlogsData && (
+          <div className="alert alert-danger mt-5" role="alert">
+            <h4 className="alert-heading text-center py-2">
+              Nothing to see here...
+            </h4>
+            <hr />
+
+            <p className="text-center fs-5">Be the first to post!</p>
+          </div>
+        )}
         {Blog.renderAll(blogs)}
       </div>
     </Fragment>

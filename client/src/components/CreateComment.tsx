@@ -1,7 +1,7 @@
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
 import axios from "axios";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { BlogData } from "../interfaces";
 import { CommentFormData } from "../interfaces";
 import { useNavigate } from "react-router";
@@ -39,10 +39,10 @@ function CreateComment(props: CreateCommentProps) {
         }
       )
       .then((response) => {
-        navigate("/dashboard");
-        console.log(response);
+        navigate(0);
         console.log("Comment created successfully");
-      });
+      })
+      .catch((e) => {});
   };
 
   return (

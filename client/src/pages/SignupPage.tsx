@@ -60,11 +60,14 @@ function Signup(): JSX.Element {
       <Header />
       <div className="container h-100 w-50">
         <div className="d-flex flex-column justify-content-center  pt-5">
-          <div className="fs-1 fw-bold d-block text-center ">Sign up</div>
-          <hr className="border border-dark opacity-50" />
-          <form className="text-center" onSubmit={submitHandler}>
-            <div className="form-group py-3 ">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+          <div className="fs-1 fw-bold d-block text-center pb-3">Sign up</div>
+          <hr className="border border-dark opacity-50 w-50 mx-auto mb-5" />
+          <form
+            className="mx-auto card py-3 px-5 rounded"
+            onSubmit={submitHandler}
+          >
+            <div className="form-group py-2 ">
+              <label className="form-check-label py-1 d-flex flex-column justify-content-center align-items-center fs-5">
                 Name
               </label>
               <input
@@ -75,7 +78,7 @@ function Signup(): JSX.Element {
               />
             </div>
             <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+              <label className="form-check-label py-1 d-flex flex-column justify-content-center align-items-center fs-5">
                 Email address
               </label>
               <input
@@ -84,12 +87,9 @@ function Signup(): JSX.Element {
                 required
                 ref={emailInputRef}
               />
-              {/* <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div> */}
             </div>
             <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+              <label className="form-check-label py-1 d-flex flex-column justify-content-center align-items-center fs-5">
                 Create Password
               </label>
               <input
@@ -100,7 +100,7 @@ function Signup(): JSX.Element {
               />
             </div>
             <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+              <label className="form-check-label py-1 d-flex flex-column justify-content-center align-items-center fs-5">
                 Confirm Password
               </label>
               <input
@@ -116,13 +116,15 @@ function Signup(): JSX.Element {
               </button>
             </div>
           </form>
-          <button
-            type="button"
-            className="btn btn-secondary py-2 mx-auto"
-            onClick={() => navigate("/login")}
-          >
-            Login with an existing account
-          </button>
+          <div className="mx-auto py-4">
+            <button
+              type="button"
+              className="btn btn-secondary py-2"
+              onClick={() => navigate("/login")}
+            >
+              Login with an existing account
+            </button>
+          </div>
         </div>
         {error && (
           <div className="pt-5">

@@ -12,7 +12,6 @@ function Login(): JSX.Element {
   const userStatus = useTypedSelector((state: RootState) => state.user);
   const isLoggedIn = userStatus.isLoggedIn;
   //const errors = useTypedSelector((state: RootState) => state.errors);
-  const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const usernameInputRef = useRef<HTMLInputElement>(null);
 
@@ -21,10 +20,9 @@ function Login(): JSX.Element {
   ): void {
     event.preventDefault();
     const username = usernameInputRef.current!.value;
-    const email = emailInputRef.current!.value;
     const password = passwordInputRef.current!.value;
 
-    const user = { username, email, password };
+    const user = { username, password };
 
     axios
       .post(
@@ -53,11 +51,14 @@ function Login(): JSX.Element {
       <Header />
       <div className="container h-100 w-50">
         <div className="d-flex flex-column justify-content-center pt-5 ">
-          <div className="fs-1 fw-bold d-block text-center ">Login</div>
-          <hr className="border border-dark opacity-50" />
-          <form className="text-center" onSubmit={submitHandler}>
+          <div className="fs-1 fw-bold d-block text-center pb-3">Login</div>
+          <hr className="border border-dark opacity-50 w-50 mx-auto mb-5" />
+          <form
+            className="mx-auto card py-5 px-5 rounded"
+            onSubmit={submitHandler}
+          >
             <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-5">
                 Username
               </label>
               <input
@@ -67,19 +68,9 @@ function Login(): JSX.Element {
                 ref={usernameInputRef}
               />
             </div>
+
             <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
-                Email address
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                required
-                ref={emailInputRef}
-              />
-            </div>
-            <div className="form-group py-3">
-              <label className="form-check-label py-2 d-flex flex-column justify-content-center align-items-center fs-4">
+              <label className="form-check-label py-1 d-flex flex-column justify-content-center align-items-center fs-5">
                 Enter Password
               </label>
               <input
@@ -89,22 +80,24 @@ function Login(): JSX.Element {
                 ref={passwordInputRef}
               />
             </div>
-            <div className="py-5 d-flex flex-column justify-content-center align-items-center">
-              <button type="submit" className="btn btn-primary px-5">
+            <div className="py-3 d-flex flex-column justify-content-center align-items-center">
+              <button type="submit" className="btn btn-primary px-3">
                 Submit
               </button>
             </div>
           </form>
-          <button
-            type="button"
-            className="btn btn-secondary py-2 mx-auto"
-            onClick={() => navigate("/signup")}
-          >
-            Create an account
-          </button>
+          <div className="mx-auto py-4">
+            <button
+              type="button"
+              className="btn btn-secondary py-2"
+              onClick={() => navigate("/signup")}
+            >
+              Create an account
+            </button>
+          </div>
           {error && (
             <div className="pt-5">
-              <div className="alert alert-danger" role="alert">
+              <div className="alert alert-danger text-center" role="alert">
                 {error}
               </div>
             </div>
