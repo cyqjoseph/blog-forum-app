@@ -11,16 +11,26 @@ function DashboardPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [noBlogsData, setNoBlogsData] = useState(false);
   const tagRef = useRef<HTMLInputElement>(null);
+
+  // Function to get all blog data
   const getBlogs = function () {
     axios
       .get(`${process.env.REACT_APP_API_URL}/all_blogs`, {
         withCredentials: true,
       })
       .then((response) => {
-        setBlogs(Blog.parseBlogs(response.data));
+        const { data } = response;
+        setBlogs(Blog.parseBlogs(data));
+        if (data.length === 0) {
+          setNoBlogsData(true);
+        } else {
+          setNoBlogsData(false);
+        }
       })
       .catch((e) => {});
   };
+
+  // Filter function to get filtered output of the blogs with mathcing tags
   const filterByTags = function () {
     if (!tagRef.current) {
       return;
@@ -30,21 +40,26 @@ function DashboardPage() {
       .get(`${process.env.REACT_APP_API_URL}/all_blogs/${tag}`, {
         withCredentials: true,
       })
-      .then((response) => setBlogs(Blog.parseBlogs(response.data)))
+      .then((response) => {
+        const { data } = response;
+        setBlogs(Blog.parseBlogs(data));
+        if (data.length === 0) {
+          setNoBlogsData(true);
+        } else {
+          setNoBlogsData(false);
+        }
+      })
       .catch((e) => {});
   };
+
   useEffect(() => {
     if (user.isLoggedIn) {
       getBlogs();
-      if (blogs.length === 0) {
-        setNoBlogsData(true);
-      } else {
-        setNoBlogsData(false);
-      }
     } else {
       navigate("/login");
     }
-  }, [user.isLoggedIn, navigate, blogs.length]);
+  }, [user.isLoggedIn, navigate]);
+
   return (
     <Fragment>
       <Header />

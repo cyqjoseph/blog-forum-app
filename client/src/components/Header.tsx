@@ -10,6 +10,8 @@ function Header() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const user = useTypedSelector((state: RootState) => state.user);
   const { logoutUser } = useActions();
+
+  // Handler function to log a user out
   const logoutHandler = function () {
     axios
       .post(`${process.env.REACT_APP_API_URL}/logout`, user, {
@@ -22,9 +24,9 @@ function Header() {
       .catch((e) => {});
   };
 
+  // Renders header data depending on whether the user is logged in
   useEffect(() => setLoggedIn(user.isLoggedIn), [user]);
 
-  // useEffect(() => console.log(user), [user]);
   return (
     <nav className="navbar bg-dark d-flex navbar-dark text-white sticky-top">
       <div className="container-fluid d-flex justify-content-around">

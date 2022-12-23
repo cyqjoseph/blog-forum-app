@@ -10,6 +10,7 @@ import { calculateElapsed } from "../utils/Helper";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Header from "../components/Header";
+
 function BlogPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,6 +21,9 @@ function BlogPage() {
   const [noCommentData, setNoCommentData] = useState<boolean>(false);
   const user = useTypedSelector((state: RootState) => state.user);
 
+  /* 
+    Get particular blog data to the page, if a user navigates to a blog which does not exist, redirect to dashboard
+  */
   const getBlogData = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}`)
@@ -29,9 +33,13 @@ function BlogPage() {
       })
       .catch((e) => {
         navigate("/dashboard");
+        // 404 page could be shown instead of redirection
       });
   }, [id, user.id, navigate]);
 
+  /* 
+    Get particular comment data to the blog
+  */
   const getCommentData = useCallback(() => {
     axios
       .get(
@@ -49,6 +57,7 @@ function BlogPage() {
       .catch((e) => {});
   }, [id, user.id]);
 
+  // Handler function to delete a blog
   const deleteBlogHandler = function () {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}`, {

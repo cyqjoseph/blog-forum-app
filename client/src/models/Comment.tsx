@@ -1,5 +1,9 @@
 import { calculateElapsed } from "../utils/Helper";
 import { CommentData } from "../interfaces";
+
+/* 
+  Comment class to encapsulate a comment's contents, contains a static method parseData to parse JSON data into a Comment instance and a render method to generate JSX for each comment instance
+*/
 class Comment {
   private commenter: string;
   private commenterId: number;

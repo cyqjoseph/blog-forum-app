@@ -1,3 +1,4 @@
+// Helper functions here
 import moment from "moment";
 
 const getMonths = function (data: string) {
@@ -77,4 +78,14 @@ export const calculateElapsed = function (data: string): string {
 
 export const getFormattedDate = function (data: string): string {
   return moment(data).format("MMMM D, YYYY");
+};
+
+export const truncateBlog = function (data: string): string {
+  const dataArr = data.split(" ");
+  const length = dataArr.length;
+  if (length <= 100) {
+    return data;
+  } else {
+    return dataArr.splice(0, 100).join(" ") + "...";
+  }
 };

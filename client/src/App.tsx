@@ -21,6 +21,8 @@ function App() {
   const { loginUser } = useActions();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+
+  // Function to modify application state depending on whether there is a user logged in
   const loginStatus = useCallback(
     () =>
       function () {

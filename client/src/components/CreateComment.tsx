@@ -1,10 +1,11 @@
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
 import axios from "axios";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { BlogData } from "../interfaces";
 import { CommentFormData } from "../interfaces";
 import { useNavigate } from "react-router";
+
 type CreateCommentProps = {
   blogData: BlogData | undefined;
 };
@@ -15,6 +16,7 @@ function CreateComment(props: CreateCommentProps) {
   const user = useTypedSelector((state: RootState) => state.user);
   const commentRef = useRef<HTMLTextAreaElement>(null);
 
+  // Handler function to create a new comment
   const createCommentHandler = function (
     event: React.SyntheticEvent<HTMLFormElement>
   ): void {
@@ -40,7 +42,7 @@ function CreateComment(props: CreateCommentProps) {
       )
       .then((response) => {
         navigate(0);
-        console.log("Comment created successfully");
+        // Perhaps a notif can be made to inform user that comment is created
       })
       .catch((e) => {});
   };

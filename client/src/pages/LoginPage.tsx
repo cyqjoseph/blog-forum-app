@@ -5,13 +5,13 @@ import { useActions } from "../hooks/use-actions";
 import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
 import { useNavigate } from "react-router";
+
 function Login(): JSX.Element {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser } = useActions();
   const userStatus = useTypedSelector((state: RootState) => state.user);
   const isLoggedIn = userStatus.isLoggedIn;
-  //const errors = useTypedSelector((state: RootState) => state.errors);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const usernameInputRef = useRef<HTMLInputElement>(null);
 

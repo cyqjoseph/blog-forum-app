@@ -1,6 +1,4 @@
-export interface LoginResponse {
-  data: LoginData;
-}
+// Contains interfaces used throughout the application
 export interface LoginData {
   user: UserData;
   logged_out: boolean;
@@ -16,16 +14,6 @@ export interface UserData {
   password?: string;
   created_at?: string;
 }
-
-export interface AuthFormProps {
-  // handleLogin: Function;
-  handleSuccessfulAuth: Function;
-}
-
-export interface DashboardProps {
-  authenticated: boolean;
-}
-
 export interface AuthResponse {
   data: Partial<LoginData>;
   status: number;
@@ -66,19 +54,3 @@ export interface CommentData {
   updated_at: string;
   blog_id: number;
 }
-
-export enum AllTags {
-  Animals,
-  Art,
-  Travel,
-  Sport,
-  Discussion,
-  News,
-  Gaming,
-  Help,
-  Other,
-}
-
-export const tagSuggestions = Object.keys(AllTags)
-  .filter((v) => isNaN(Number(v)))
-  .map((tag) => tag);

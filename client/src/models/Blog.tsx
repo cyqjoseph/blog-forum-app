@@ -1,22 +1,29 @@
 import { BlogData } from "../interfaces";
-import { calculateElapsed } from "../utils/Helper";
+import { calculateElapsed, truncateBlog } from "../utils/Helper";
 import { Link } from "react-router-dom";
+
+/* 
+  Blog class to encapsulate a blog's contents, contains a static method parseBlogs to parse JSON data into a Blog instance and a render method to generate JSX for each blog instance
+*/
 class Blog {
   private creator: string;
   private creatorId: number;
   private title: string;
-  private body: String;
+  private body: string;
   private likes: number;
   private dislikes: number;
   private created: string;
   private id: number;
   private tag_list: string[];
+  private liked = false;
+  private disliked = false;
+  // how to make liked/disliked persist?
 
   constructor(
     creator: string,
     creatorId: number,
     title: string,
-    body: String,
+    body: string,
     created: string,
     id: number,
     tag_list: string[],
@@ -69,26 +76,9 @@ class Blog {
               </Link>
               &nbsp; - {this.title}
             </div>
-            <div className="">
-              <button className="btn btn-sm btn-success mx-1">
-                Likes: {this.likes}
-              </button>
-              <button className="btn btn-sm btn-danger ">
-                Disikes: {this.dislikes}
-              </button>
-              <Link
-                className="btn btn-primary btn-sm border-dark mx-1"
-                // onClick={this.getBlogPageHandler.bind(this)}
-                to={`/blog/${this.id}`}
-              >
-                Read more &#x2192;
-              </Link>
-            </div>
           </h4>
 
-          <h4 className="text-center py-3 mx-5">
-            {this.body} - ({calculateElapsed(this.created)})
-          </h4>
+          <h4 className="text-center py-3 mx-5">{truncateBlog(this.body)}</h4>
           <div className="lead d-flex justify-content-around pb-2">
             <div className="d-flex">
               {this.tag_list.map((ele) => (
@@ -98,6 +88,26 @@ class Blog {
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+          <hr className="border border-secondary border-1 opacity-50" />
+          <div className="d-flex justify-content-around  align-items-center pb-3">
+            <div className="text-secondary">
+              {calculateElapsed(this.created)}
+            </div>
+            <div className="">
+              <button className="btn btn-sm btn-success mx-1">
+                Likes: {this.likes}
+              </button>
+              <button className="btn btn-sm btn-danger ">
+                Disikes: {this.dislikes}
+              </button>
+              <Link
+                className="btn btn-primary btn-sm border-dark mx-1"
+                to={`/blog/${this.id}`}
+              >
+                Read more &#x2192;
+              </Link>
             </div>
           </div>
         </div>

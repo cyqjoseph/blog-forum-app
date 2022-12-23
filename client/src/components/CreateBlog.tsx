@@ -11,6 +11,8 @@ function CreateBlog() {
   const user = useTypedSelector((state: RootState) => state.user);
   const titleRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+
+  // Handler function for creating a new blog
   const createBlogHandler = function (
     event: React.SyntheticEvent<HTMLFormElement>
   ): void {

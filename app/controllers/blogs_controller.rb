@@ -8,7 +8,7 @@ class BlogsController < ApplicationController
 
     def filter 
         ActsAsTaggableOn.force_lowercase = true
-        @blogs = Blog.tagged_with(params[:tag])
+        @blogs = Blog.tagged_with(params[:tag], wild: true)
 
         render json: @blogs
     end

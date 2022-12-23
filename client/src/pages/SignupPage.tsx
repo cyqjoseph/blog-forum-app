@@ -10,7 +10,6 @@ function Signup(): JSX.Element {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser, addError } = useActions();
-  // const errors = useTypedSelector((state: RootState) => state.errors);
   const user = useTypedSelector((state: RootState) => state.user);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -55,6 +54,7 @@ function Signup(): JSX.Element {
       navigate("/dashboard");
     }
   }, [user.isLoggedIn, navigate]);
+
   return (
     <Fragment>
       <Header />

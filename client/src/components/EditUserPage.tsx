@@ -5,9 +5,8 @@ import { useRef, useCallback, useState, useEffect, Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserData } from "../interfaces";
 import Header from "./Header";
+
 function EditUserPage() {
-  // const [error, setError] = useState("");
-  // const { addError } = useActions();
   const navigate = useNavigate();
   const { id } = useParams();
   const [userResponse, setUserRepsonse] = useState<UserData>();
@@ -15,6 +14,10 @@ function EditUserPage() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const usernameInputRef = useRef<HTMLInputElement>(null);
   const confirmInputRef = useRef<HTMLInputElement>(null);
+
+  /* 
+    Gets the particular user data belonging to the authenticated user, if a non-owner tries to access the page, they are re-directed back to the dashboard
+  */
   const getUser = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${id}`)
@@ -30,6 +33,7 @@ function EditUserPage() {
       });
   }, [id, navigate, userState.id]);
 
+  // Handler function when a user edits their information
   const submitHandler = function (
     event: React.SyntheticEvent<HTMLFormElement>
   ): void {

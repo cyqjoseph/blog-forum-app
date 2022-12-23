@@ -16,6 +16,10 @@ function EditBlog() {
   const user = useTypedSelector((state: RootState) => state.user);
   const titleRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+
+  /* 
+    Gets the particular blog data belonging to the authenticated user, if a non-owner tries to access the page, they are re-directed back
+  */
   const getBlogData = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/blogs/${id}`)
@@ -32,6 +36,9 @@ function EditBlog() {
       .catch((e) => {});
   }, [id, user.id, navigate]);
 
+  /*
+    Handler function to edit a blog
+  */
   const editBlogHandler = function (
     event: React.SyntheticEvent<HTMLFormElement>
   ): void {

@@ -7,6 +7,7 @@ import {
 } from "../actions";
 import { UserData } from "../../interfaces";
 
+// Action creators to modify state
 export const loginUser = function (user: UserData): LoginAction {
   return {
     type: ActionType.LOGIN_USER,

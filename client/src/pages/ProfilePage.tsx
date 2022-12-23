@@ -14,6 +14,8 @@ function ProfilePage() {
   const [userResponse, setUserRepsonse] = useState<UserData>();
   const [blogsResponse, setBlogsResponse] = useState<Blog[]>();
   const [noBlogsData, setNoBlogsData] = useState<boolean>(false);
+
+  // Get authenticated user data
   const getUser = function () {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${id}`)
@@ -25,6 +27,7 @@ function ProfilePage() {
       });
   };
 
+  // Get authenticated user blog data
   const getUserBlogs = function () {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users/${id}/blogs`)
