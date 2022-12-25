@@ -41,7 +41,7 @@ function CreateComment(props: CreateCommentProps) {
         }
       )
       .then((response) => {
-        navigate(0);
+        setTimeout(() => navigate(0), 1000);
         // Perhaps a notif can be made to inform user that comment is created
       })
       .catch((e) => {});
