@@ -4,13 +4,15 @@ import { useTypedSelector } from "../hooks/use-typed-selector";
 import { RootState } from "../state";
 import axios from "axios";
 import { UserData } from "../interfaces";
-import { getFormattedDate } from "../utils/Helper";
+import { getFormattedDate, overrideCSS } from "../utils/Helper";
 import Blog from "../models/Blog";
 import Header from "../components/Header";
+import RingLoader from "react-spinners/RingLoader";
 function ProfilePage() {
   const user = useTypedSelector((state: RootState) => state.user);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [userResponse, setUserRepsonse] = useState<UserData>();
   const [blogsResponse, setBlogsResponse] = useState<Blog[]>();
   const [noBlogsData, setNoBlogsData] = useState<boolean>(false);
@@ -40,6 +42,7 @@ function ProfilePage() {
           setBlogsResponse(blogs);
         }
       })
+      .then(() => setLoading(false))
       .catch((e) => {});
   };
 
@@ -53,6 +56,15 @@ function ProfilePage() {
     <Fragment>
       <Header />
       <div className="container h-100 w-70">
+        <RingLoader
+          color={"#4cad50"}
+          loading={loading}
+          cssOverride={overrideCSS}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="mt-5"
+        />
         {userResponse && (
           <div className="d-flex flex-column justify-content-around  pt-5">
             <div className="d-flex justify-content-around">

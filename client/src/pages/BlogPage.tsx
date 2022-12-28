@@ -6,14 +6,16 @@ import { useEffect, useCallback, useState, Fragment } from "react";
 import { BlogData, CommentData } from "../interfaces";
 import CreateComment from "../components/CreateComment";
 import Comment from "../models/Comment";
-import { calculateElapsed } from "../utils/Helper";
+import { calculateElapsed, overrideCSS } from "../utils/Helper";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Header from "../components/Header";
+import RingLoader from "react-spinners/RingLoader";
 
 function BlogPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [blogData, setBlogData] = useState<BlogData>();
   const [commentData, setCommentData] = useState<CommentData[]>([]);
   const [blogLoading, setBlogLoading] = useState<boolean>(true);
@@ -30,6 +32,9 @@ function BlogPage() {
       .then((response) => {
         setBlogData(response.data[0]);
         setBlogLoading(false);
+      })
+      .then(() => {
+        setLoading(false);
       })
       .catch((e) => {
         navigate("/dashboard");
@@ -125,6 +130,15 @@ function BlogPage() {
             </div>
           </div>
         </div>
+        <RingLoader
+          color={"#4cad50"}
+          loading={loading}
+          cssOverride={overrideCSS}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="mt-5"
+        />
         {!blogLoading && (
           <div className="py-2">
             <div className="py-2 ">

@@ -1,6 +1,6 @@
 // Helper functions here
 import moment from "moment";
-
+import { CSSProperties } from "react";
 const getMonths = function (data: string) {
   const months = Math.floor(moment.duration(moment().diff(data)).asMonths());
   if (months > 1) {
@@ -88,4 +88,9 @@ export const truncateBlog = function (data: string): string {
   } else {
     return dataArr.splice(0, 100).join(" ") + "...";
   }
+};
+
+export const overrideCSS: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
 };

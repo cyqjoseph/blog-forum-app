@@ -5,10 +5,13 @@ import { useState, useEffect, useRef, Fragment } from "react";
 import Blog from "../models/Blog";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import RingLoader from "react-spinners/RingLoader";
+import { overrideCSS } from "../utils/Helper";
 function DashboardPage() {
   const navigate = useNavigate();
   const user = useTypedSelector((state: RootState) => state.user);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
   const [noBlogsData, setNoBlogsData] = useState(false);
   const tagRef = useRef<HTMLInputElement>(null);
 
@@ -21,11 +24,15 @@ function DashboardPage() {
       .then((response) => {
         const { data } = response;
         setBlogs(Blog.parseBlogs(data));
+
         if (data.length === 0) {
           setNoBlogsData(true);
         } else {
           setNoBlogsData(false);
         }
+      })
+      .then(() => {
+        setLoading(false);
       })
       .catch((e) => {});
   };
@@ -97,6 +104,15 @@ function DashboardPage() {
             &#128269;
           </button>
         </div>
+        <RingLoader
+          color={"#4cad50"}
+          loading={loading}
+          cssOverride={overrideCSS}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="mt-5"
+        />
         {noBlogsData && (
           <div className="alert alert-danger mt-5" role="alert">
             <h4 className="alert-heading text-center py-2">
