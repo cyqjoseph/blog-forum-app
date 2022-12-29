@@ -27,7 +27,7 @@ function App() {
     () =>
       function () {
         axios
-          .get<LoginData>("http://localhost:3001/logged_in", {
+          .get<LoginData>(`${process.env.REACT_APP_API_URL}/logged_in`, {
             withCredentials: true,
           })
           .then((response: AuthResponse) => {
@@ -64,7 +64,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        <Route path="dashboard/*" element={<Dashboard />}></Route>
+        <Route path="dashboard/*" element={<Dashboard />} />
         <Route path="profile/:id" element={<ProfilePage />} />
         <Route path="create-blog" element={<CreateBlog />} />
         <Route path="edit-profile/:id" element={<EditUserPage />} />
