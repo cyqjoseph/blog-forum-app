@@ -96,12 +96,12 @@ class Blog {
               {calculateElapsed(this.created)}
             </div>
             <div className="">
-              <button className="btn btn-sm btn-success mx-1">
+              {/* <button className="btn btn-sm btn-success mx-1">
                 Likes: {this.likes}
               </button>
               <button className="btn btn-sm btn-danger ">
                 Disikes: {this.dislikes}
-              </button>
+              </button> */}
               <Link
                 className="btn btn-primary btn-sm border-dark mx-1"
                 to={`/blog/${this.id}`}

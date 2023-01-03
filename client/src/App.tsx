@@ -16,6 +16,7 @@ import BlogPage from "./pages/BlogPage";
 import EditBlog from "./components/EditBlog";
 import ProfilePage from "./pages/ProfilePage";
 import EditUserPage from "./components/EditUserPage";
+import Footer from "./components/Footer";
 function App() {
   const data = useTypedSelector((state: RootState) => state);
   const { loginUser } = useActions();
@@ -72,6 +73,7 @@ function App() {
         <Route path="blog/:id/edit-blog" element={<EditBlog />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

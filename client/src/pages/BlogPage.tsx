@@ -190,7 +190,7 @@ function BlogPage() {
 
               <h4 className="text-center py-3 mx-5">{blogData!.body}</h4>
               <div className="lead d-flex justify-content-around pb-2">
-                <div>
+                {/* <div>
                   <button className="btn btn-sm btn-success">
                     Likes: {blogData!.likes}
                   </button>
@@ -198,7 +198,7 @@ function BlogPage() {
                   <button className="btn btn-sm btn-danger">
                     Disikes: {blogData!.dislikes}
                   </button>
-                </div>
+                </div> */}
                 <div className="d-flex">
                   {blogData?.tag_list.map((ele) => (
                     <div className="mx-1">
