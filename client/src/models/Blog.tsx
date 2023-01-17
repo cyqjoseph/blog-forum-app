@@ -10,14 +10,9 @@ class Blog {
   private creatorId: number;
   private title: string;
   private body: string;
-  private likes: number;
-  private dislikes: number;
   private created: string;
   private id: number;
   private tag_list: string[];
-  private liked = false;
-  private disliked = false;
-  // how to make liked/disliked persist?
 
   constructor(
     creator: string,
@@ -26,22 +21,24 @@ class Blog {
     body: string,
     created: string,
     id: number,
-    tag_list: string[],
-    likes = 0,
-    dislikes = 0
+    tag_list: string[]
   ) {
     this.creator = creator;
     this.creatorId = creatorId;
     this.title = title;
     this.body = body;
-    this.likes = likes;
-    this.dislikes = dislikes;
+
     this.created = created;
     this.id = id;
     this.tag_list = tag_list;
   }
 
+  public static sortBlogs = function (data: BlogData[]) {
+    data.sort((a, b) => (a.created_at > b.created_at ? -1 : 1));
+  };
+
   public static parseBlogs = function (data: BlogData[]): Blog[] {
+    Blog.sortBlogs(data);
     let ret: Blog[] = [];
     for (const ele of data) {
       let temp = new Blog(
@@ -55,7 +52,7 @@ class Blog {
       );
       ret.push(temp);
     }
-    return ret.reverse();
+    return ret;
   };
 
   public static renderAll(data: Blog[]) {
@@ -96,12 +93,6 @@ class Blog {
               {calculateElapsed(this.created)}
             </div>
             <div className="">
-              {/* <button className="btn btn-sm btn-success mx-1">
-                Likes: {this.likes}
-              </button>
-              <button className="btn btn-sm btn-danger ">
-                Disikes: {this.dislikes}
-              </button> */}
               <Link
                 className="btn btn-primary btn-sm border-dark mx-1"
                 to={`/blog/${this.id}`}
@@ -113,10 +104,6 @@ class Blog {
         </div>
       </div>
     );
-  }
-
-  public getReputation(): number {
-    return this.likes - this.dislikes;
   }
 }
 

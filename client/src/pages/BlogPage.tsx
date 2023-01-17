@@ -190,15 +190,6 @@ function BlogPage() {
 
               <h4 className="text-center py-3 mx-5">{blogData!.body}</h4>
               <div className="lead d-flex justify-content-around pb-2">
-                {/* <div>
-                  <button className="btn btn-sm btn-success">
-                    Likes: {blogData!.likes}
-                  </button>
-                  &nbsp;
-                  <button className="btn btn-sm btn-danger">
-                    Disikes: {blogData!.dislikes}
-                  </button>
-                </div> */}
                 <div className="d-flex">
                   {blogData?.tag_list.map((ele) => (
                     <div className="mx-1">
@@ -210,7 +201,9 @@ function BlogPage() {
                 </div>
               </div>
             </div>
-            <CreateComment blogData={blogData} />
+            <div className="py-2 my-2 border rounded">
+              <CreateComment blogData={blogData} />
+            </div>
             <div>
               {noCommentData && (
                 <div className="alert alert-danger mt-5" role="alert">

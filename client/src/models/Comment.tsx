@@ -1,6 +1,6 @@
 import { calculateElapsed } from "../utils/Helper";
 import { CommentData } from "../interfaces";
-
+import { Link } from "react-router-dom";
 /* 
   Comment class to encapsulate a comment's contents, contains a static method parseData to parse JSON data into a Comment instance and a render method to generate JSX for each comment instance
 */
@@ -9,8 +9,6 @@ class Comment {
   private commenterId: number;
   private blogId: number;
   private body: string;
-  private likes: number;
-  private dislikes: number;
   private created: string;
   private id: number;
 
@@ -20,16 +18,12 @@ class Comment {
     blogId: number,
     body: string,
     created: string,
-    likes: number,
-    dislikes: number,
     id: number
   ) {
     this.commenter = commenter;
     this.commenterId = commenterId;
     this.blogId = blogId;
     this.body = body;
-    this.likes = likes;
-    this.dislikes = dislikes;
     this.created = created;
     this.id = id;
   }
@@ -43,8 +37,6 @@ class Comment {
           ele.blog_id,
           ele.body,
           ele.created_at,
-          ele.likes,
-          ele.dislikes,
           ele.id
         )
     );
@@ -57,10 +49,12 @@ class Comment {
           <div className="d-flex justify-content-between align-items-center">
             <div className="user d-flex flex-row align-items-center w-75">
               <span>
-                <small className="font-weight-bold text-primary mr-2 fs-4">
+                <Link
+                  className="font-weight-bold text-primary mr-2 fs-4 text-decoration-none"
+                  to={`/profile/${this.commenterId}`}
+                >
                   @{this.commenter}
-                </small>
-
+                </Link>
                 <small className="d-flex">{this.body}</small>
               </span>
             </div>

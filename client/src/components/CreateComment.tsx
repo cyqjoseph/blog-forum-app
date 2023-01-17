@@ -41,25 +41,26 @@ function CreateComment(props: CreateCommentProps) {
         }
       )
       .then((response) => {
-        navigate("/dashboard");
+        setTimeout(() => navigate(0), 2000);
+
         // Perhaps a notif can be made to inform user that comment is created
       })
       .catch((e) => {});
   };
 
   return (
-    <div className="container pt-2">
+    <div className=" container py-2">
       <form onSubmit={createCommentHandler}>
         <div className="form-group py-1">
-          <label>Write a comment</label>
+          <label className="py-1 fw-bold fs-5">Comment now!</label>
           <textarea
             className="form-control py-2"
             rows={1}
             ref={commentRef}
           ></textarea>
         </div>
-        <div className="py-2 ">
-          <button type="submit" className="btn btn-primary btn-sm">
+        <div className="py-2">
+          <button type="submit" className="btn btn-primary btn-sm ">
             Submit
           </button>
         </div>
