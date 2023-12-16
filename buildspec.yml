@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+      ruby: 2.7
+    commands:
+      - echo Installing Ruby dependencies
+      - bundle install
+      - echo Installing Node.js dependencies for the React client
+      - cd client
+      - npm install
+      - cd ..
+
+  pre_build:
+    commands:
+      - echo Pre-build phase...
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Ruby application
+      - echo Building the React/TypeScript client
+      - cd client
+      - npm run build
+      - cd ..
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
