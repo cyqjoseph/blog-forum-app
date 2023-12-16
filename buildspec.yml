@@ -2,12 +2,14 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 12
-      ruby: 3.1.3
     commands:
-      - echo Installing Ruby dependencies
-      - bundle install
+      - echo Installing Ruby 3.1.3...
+      - sudo apt-get update
+      - sudo apt-get install -y software-properties-common
+      - sudo apt-add-repository -y ppa:brightbox/ruby-ng
+      - sudo apt-get update
+      - sudo apt-get install -y ruby3.1 ruby3.1-dev
+      - ruby -v
       - echo Installing Node.js dependencies for the React client
       - cd client
       - npm install
